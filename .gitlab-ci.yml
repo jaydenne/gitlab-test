@@ -1,5 +1,11 @@
 image: gitlab.inovexcorp.com:4567/ilab/docker-images/maven-node-jdk8
 
+before_script:
+  - PRIVATE_URL="$(echo $CI_PROJECT_URL | sed "s|https://|https://gitlab-ci-token:$ACCESS_TOKEN@|g").git"
+  - git remote set-url origin $PRIVATE_URL
+  - git config --global user.email 'gitlab.runner@inovexcorp.com'
+  - git config --global user.name 'Gitlab Runner'
+
 stages:
   - create_release_branch
   - new_release_deploy
