@@ -1,8 +1,3 @@
-include:
-  - project: 'matonto/gitlab-ci'
-    ref: master
-    file: 'shared-template.yml'
-
 stages:
   - create_release_branch
   - new_release_deploy
