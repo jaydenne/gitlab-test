@@ -5,7 +5,7 @@ include:
 
 stages:
   - create_release_branch
-  - update_github
+  - new_release_deploy
 
 create_release_branch:
   stage: create_release_branch
