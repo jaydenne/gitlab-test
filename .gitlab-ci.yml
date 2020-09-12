@@ -23,7 +23,5 @@ create_release_branch:
     - git push origin $CI_COMMIT_TAG
     # - git remote add github git@github.com:inovexcorp/mobi.git
     - git remote add github https://jaydenne:$JESSE_GITHUB_TOKEN@github.com/jaydenne/gitlab-test.git
-    - git checkout remotes/gitlab/master
     - git push github HEAD:master
-    - git checkout remotes/gitlab/$CI_COMMIT_TAG
     - git push github HEAD:$CI_COMMIT_TAG
