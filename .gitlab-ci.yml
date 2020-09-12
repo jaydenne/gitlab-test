@@ -1,0 +1,34 @@
+include:
+  - project: 'matonto/gitlab-ci'
+    ref: master
+    file: 'shared-template.yml'
+
+stages:
+  - create_release_branch
+  - update_github
+
+create_release_branch:
+  stage: create_release_branch
+  only:
+    - /release\/\d+\.\d+/
+  except:
+    - branches
+  script:
+    - git tag -d $CI_COMMIT_TAG
+    - git push origin :$CI_COMMIT_TAG
+    - git checkout -b $CI_COMMIT_TAG
+    - git push origin $CI_COMMIT_TAG
+
+update_github:
+  stage: new_release_deploy
+  only:
+    - /release\d*\.\d*/
+  except:
+    - branches
+  script:
+    # - git remote add github git@github.com:inovexcorp/mobi.git
+    - git remote add github git@github.com:jaydenne/gitlab-test.git
+    - git checkout remotes/gitlab/master
+    - git push github HEAD:master
+    - git checkout remotes/gitlab/$CI_COMMIT_TAG
+    - git push github HEAD:$CI_COMMIT_TAG
